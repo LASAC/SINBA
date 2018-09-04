@@ -1,7 +1,7 @@
-import { fromJS } from 'immutable';
+import { fromJS } from 'immutable'
 
-import languageProviderReducer from '../reducer';
-import { CHANGE_LOCALE } from '../constants';
+import languageProviderReducer from '../reducer'
+import { CHANGE_LOCALE } from '../constants'
 
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {
@@ -9,8 +9,8 @@ describe('languageProviderReducer', () => {
       fromJS({
         locale: 'en',
       }),
-    );
-  });
+    )
+  })
 
   it('changes the locale', () => {
     expect(
@@ -20,6 +20,6 @@ describe('languageProviderReducer', () => {
       }).toJS(),
     ).toEqual({
       locale: 'de',
-    });
-  });
-});
+    })
+  })
+})

@@ -9,10 +9,10 @@
  * the linting exception.
  */
 
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import messages from './messages';
+import messages from './messages'
 
 /* eslint-disable react/prefer-stateless-function */
 export default class NotFound extends React.PureComponent {
@@ -21,6 +21,6 @@ export default class NotFound extends React.PureComponent {
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-    );
+    )
   }
 }

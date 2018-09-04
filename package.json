@@ -1,16 +1,16 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.6.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "sinba",
+  "version": "2.0.0",
+  "description": "SINBA - Watershed Information System/Sistema de Informação de Bacias Hidrográficas",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/LASAC/sinba.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8"
   },
-  "author": "Max Stoiber",
+  "author": "Geraldo Barbosa Landre, Marilia Chinem Kameya, LASAC/UFMS",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",

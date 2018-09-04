@@ -8,18 +8,18 @@
  * the webpack process.
  */
 
-const { join } = require('path');
-const defaults = require('lodash/defaultsDeep');
-const webpack = require('webpack');
-const pkg = require(join(process.cwd(), 'package.json'));
-const { dllPlugin } = require('../config');
+const { join } = require('path')
+const defaults = require('lodash/defaultsDeep')
+const webpack = require('webpack')
+const pkg = require(join(process.cwd(), 'package.json'))
+const { dllPlugin } = require('../config')
 
 if (!pkg.dllPlugin) {
-  process.exit(0);
+  process.exit(0)
 }
 
-const dllConfig = defaults(pkg.dllPlugin, dllPlugin.defaults);
-const outputPath = join(process.cwd(), dllConfig.path);
+const dllConfig = defaults(pkg.dllPlugin, dllPlugin.defaults)
+const outputPath = join(process.cwd(), dllConfig.path)
 
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
@@ -43,4 +43,4 @@ module.exports = require('./webpack.base.babel')({
   performance: {
     hints: false,
   },
-});
+})

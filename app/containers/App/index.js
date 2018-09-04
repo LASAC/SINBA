@@ -11,19 +11,25 @@
  * the linting exception.
  */
 
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom'
+import React from 'react'
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import HomePage from 'containers/HomePage/Loadable'
+import LandingPage from 'containers/LandingPage/Loadable'
+import LoginPage from 'containers/LoginPage/Loadable'
+import NotFoundPage from 'containers/NotFoundPage/Loadable'
+import RegisterPage from 'containers/RegisterPage/Loadable'
 
 export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/home" component={HomePage} />
+        <Route exact path="/register" component={RegisterPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  );
+  )
 }

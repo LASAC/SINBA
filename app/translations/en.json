@@ -1,1 +1,5 @@
-[]
+{
+  "app.containers.LandingPage.documentation": "Docs",
+  "app.messages.login": "Login",
+  "app.messages.register": "Register"
+}
