@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import BaseBox from 'components/Box'
+import Types from 'types'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,10 +21,7 @@ const LoginView = ({ children }) => (
 )
 
 LoginView.propTypes = {
-  children: PropTypes.oneOf([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]),
+  children: Types.childrenComponent,
 }
 
 export default LoginView

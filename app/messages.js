@@ -7,4 +7,8 @@ export default {
     id: 'app.messages.register',
     defaultMessage: 'Registrar',
   },
+  password: {
+    id: 'app.messages.password',
+    defaultMessage: 'Password',
+  },
 }

@@ -4,10 +4,26 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants'
+import { SUBMIT_ACTION, CHANGE_EMAIL, CHANGE_PASSWORD } from './constants'
 
 export function defaultAction() {
   return {
-    type: DEFAULT_ACTION,
+    type: SUBMIT_ACTION,
+  }
+}
+
+export function changeEmail(email) {
+  console.log('changeEmail', { email })
+  return {
+    type: CHANGE_EMAIL,
+    payload: { email },
+  }
+}
+
+export function changePassword(password) {
+  console.log('changePassword', { password })
+  return {
+    type: CHANGE_PASSWORD,
+    payload: { password },
   }
 }

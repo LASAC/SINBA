@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import Types from 'types'
 import styled from 'styled-components'
 import {
   topNavBackgroundColor,
@@ -53,10 +53,7 @@ const TopNav = ({ children }) => (
 )
 
 TopNav.propTypes = {
-  children: PropTypes.oneOf([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]),
+  children: Types.childrenComponent,
 }
 
 export default TopNav

@@ -1,5 +1,6 @@
 {
   "app.containers.LandingPage.documentation": "Documentação",
   "app.messages.login": "Entrar",
-  "app.messages.register": "Registrar"
+  "app.messages.register": "Registrar",
+  "app.messages.password": "Senha"
 }
