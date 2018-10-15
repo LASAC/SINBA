@@ -15,10 +15,11 @@ import injectSaga from 'utils/injectSaga'
 import Page from 'components/Page'
 import PropTypes from 'prop-types'
 import React from 'react'
+import Button from 'components/Button'
 import TextInput from 'components/TextInput'
 import TopNav from 'components/TopNav'
 
-import LoginView from './CredentialsBox'
+import CredentialsBox from './CredentialsBox'
 import makeSelectLoginPage from './selectors'
 import messages from './messages'
 import reducer from './reducer'
@@ -36,7 +37,7 @@ export class LoginPage extends React.PureComponent {
           </Link>
         </TopNav>
 
-        <LoginView>
+        <CredentialsBox>
           <Form>
             <TextInput
               label="Email"
@@ -51,9 +52,18 @@ export class LoginPage extends React.PureComponent {
               value={password}
               onChange={this.props.onChangePassword}
             />
-            <button onClick={console.log} />
+            <Button
+              height="30px"
+              width="97%"
+              onClick={evt => {
+                evt.preventDefault()
+                console.log('TODO: Login click')
+              }}
+            >
+              Login
+            </Button>
           </Form>
-        </LoginView>
+        </CredentialsBox>
       </Page>
     )
   }

@@ -15,6 +15,9 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   background-color: ${backgroundColor};
   border-bottom: 1px solid #d9dee4;
+  position: fixed;
+  width: 100%;
+  top: 0;
 
   a {
     text-decoration: none;

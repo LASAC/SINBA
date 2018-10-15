@@ -32,6 +32,7 @@ injectGlobal`
     background-color: ${backgroundColor};
     min-height: 100%;
     min-width: 100%;
+    overflow: scroll;
   }
 
   h1 {

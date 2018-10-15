@@ -1,27 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
 import BaseBox from 'components/Box'
+// import Box from 'components/Box'
 import Types from 'types'
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 15%;
+  margin-top: 15vh;
 `
 
 const Box = styled(BaseBox)`
-  min-width: 400px;
-  min-height: 150px;
+  flex-direction: column;
+  width: 90vw;
+
+  @media only screen and (min-device-width: 540px) {
+    max-width: 520px;
+  }
 `
 
-const CredentialsBox = ({ children }) => (
+const RegisterBox = ({ children }) => (
   <Wrapper>
     <Box>{children}</Box>
   </Wrapper>
 )
 
-CredentialsBox.propTypes = {
+RegisterBox.propTypes = {
   children: Types.childrenComponent,
 }
 
-export default CredentialsBox
+export default RegisterBox

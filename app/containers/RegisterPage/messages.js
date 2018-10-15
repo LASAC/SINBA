@@ -11,6 +11,6 @@ export default defineMessages({
   ...globalMessages,
   header: {
     id: 'app.containers.RegisterPage.header',
-    defaultMessage: 'This is RegisterPage container !',
+    defaultMessage: 'Register Request',
   },
 })
