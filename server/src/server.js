@@ -3,12 +3,14 @@ import 'babel-polyfill'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import dbConnect from './db'
+import cors from 'cors'
 import api from './api'
+import dbConnect from './db'
 
 const app = express()
 
 app.use(helmet())
+app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

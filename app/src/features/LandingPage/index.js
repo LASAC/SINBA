@@ -14,65 +14,79 @@ import H1 from './H1'
 import messages from './messages'
 import Page from './Page'
 import TopNav from './TopNav'
+import version from '../../services/backend/version'
 
-const LandingPage = () => {
-  return (
-    <Context.Consumer>
-      {context => {
-        console.log('locale:', context.locale)
-        console.log('setLocale:', context.setLocale)
-        return (
-          <Page>
-            <Background />
-            <TopNav>
-              <Link to='/login'>
-                <FormattedMessage {...messages.login} />
-              </Link>
-              <Link to='/register'>
-                <FormattedMessage {...messages.register} />
-              </Link>
-            </TopNav>
-            <header>
-              <H1>SINBA</H1>
-            </header>
-            <main>
-              <CenteredNav>
-                <a
-                  target='_blank'
-                  href='https://github.com/LASAC/sinba-proto/wiki'
-                  rel='noopener noreferrer'
-                >
-                  <FormattedMessage {...messages.documentation} />
-                </a>
-                <a
-                  target='_blank'
-                  href='http://lasac.ledes.net'
-                  rel='noopener noreferrer'
-                >
-                  LASAC
-                </a>
-                <a
-                  target='_blank'
-                  href='http://www.ledes.net'
-                  rel='noopener noreferrer'
-                >
-                  LEDES
-                </a>
-                <a
-                  target='_blank'
-                  href='https://ufms.br'
-                  rel='noopener noreferrer'
-                >
-                  UFMS
-                </a>
-              </CenteredNav>
-            </main>
-            <Footer>2.0.0</Footer>
-          </Page>
-        )
-      }}
-    </Context.Consumer>
-  )
+class LandingPage extends React.Component {
+  state = { version: '???' }
+
+  async componentDidMount () {
+    const { ok, data } = await version.get()
+    if (ok) {
+      const { version } = data
+      console.log('version received from the server:', version)
+      this.setState({ version })
+    }
+  }
+
+  render () {
+    return (
+      <Context.Consumer>
+        {context => {
+          console.log('locale:', context.locale)
+          console.log('setLocale:', context.setLocale)
+          return (
+            <Page>
+              <Background />
+              <TopNav>
+                <Link to='/login'>
+                  <FormattedMessage {...messages.login} />
+                </Link>
+                <Link to='/register'>
+                  <FormattedMessage {...messages.register} />
+                </Link>
+              </TopNav>
+              <header>
+                <H1>SINBA</H1>
+              </header>
+              <main>
+                <CenteredNav>
+                  <a
+                    target='_blank'
+                    href='https://github.com/LASAC/sinba-proto/wiki'
+                    rel='noopener noreferrer'
+                  >
+                    <FormattedMessage {...messages.documentation} />
+                  </a>
+                  <a
+                    target='_blank'
+                    href='http://lasac.ledes.net'
+                    rel='noopener noreferrer'
+                  >
+                    LASAC
+                  </a>
+                  <a
+                    target='_blank'
+                    href='http://www.ledes.net'
+                    rel='noopener noreferrer'
+                  >
+                    LEDES
+                  </a>
+                  <a
+                    target='_blank'
+                    href='https://ufms.br'
+                    rel='noopener noreferrer'
+                  >
+                    UFMS
+                  </a>
+                </CenteredNav>
+              </main>
+              <Footer>{this.state.version}</Footer>
+            </Page>
+          )
+        }}
+      </Context.Consumer>
+    )
+  }
 }
 
 LandingPage.contextType = Context

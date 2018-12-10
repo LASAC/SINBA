@@ -25,6 +25,7 @@ export const getById = id => {
 }
 
 export const add = async data => {
+  console.log('users/model/add > data received:', data)
   validate(data)
   const element = new Model(data)
   await element.save()

@@ -16,11 +16,9 @@ import TextInput from '../../components/TextInputColumn'
 import Title from './Title'
 import RegisterBox from './RegisterBox'
 import messages from './messages'
+import users from '../../services/backend/users'
 
-// TODO: get label from messages based on the name passed
 const getLabel = name => {
-  console.log('getLabel - name:', name)
-  console.log('getLabel - messages[name]:', messages[name])
   return <FormattedMessage {...messages[name]} />
 }
 
@@ -146,6 +144,15 @@ export class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              key='address'
+              label={getLabel('address')}
+              name='address'
+              value={fields.address.value}
+              onChange={evt => {
+                this.updateField('address', evt.target.value)
+              }}
+            />
+            <TextInput
               key='justification'
               label={getLabel('justification')}
               name='justification'
@@ -183,14 +190,7 @@ export class RegisterPage extends React.PureComponent {
                 this.updateField('confirmPassword', evt.target.value)
               }}
             />
-            <Button
-              onClick={evt => {
-                evt.preventDefault()
-                console.log('TODO: validate and submit form')
-              }}
-              color='primary'
-              variant='contained'
-            >
+            <Button onClick={this.submit} color='primary' variant='contained'>
               <FormattedMessage {...messages.register} />
             </Button>
           </Form>
@@ -216,6 +216,25 @@ export class RegisterPage extends React.PureComponent {
         [name]: this.validate({ name, value })
       }
     })
+  }
+
+  submit = async evt => {
+    evt.preventDefault()
+    const { fields } = this.state
+    let payload = {}
+    for (const field of Object.keys(fields)) {
+      payload[field] = fields[field].value
+    }
+
+    console.log('RegisterPage.submit > payload:', payload)
+    const { ok, data } = await users.post(payload)
+    if (ok) {
+      alert('Registration complete!')
+      console.log('Registration complete! data:', data)
+    } else {
+      alert('Sorry! Registration unsuccessful...')
+      console.log('Registration error:', data)
+    }
   }
 }
 

@@ -1,6 +1,6 @@
-import app from './app'
+import server from './server'
 
 const port = process.env.PORT || 8081
-app.listen(port, () => console.log(`Listening on port ${port}`))
+server.listen(port, () => console.log(`Listening on port ${port}`))
 
-export default app
+export default server
