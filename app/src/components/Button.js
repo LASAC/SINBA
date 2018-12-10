@@ -1,5 +1,5 @@
 import React from 'react'
-import Types from 'types'
+import Types from '../types'
 import styled from 'styled-components'
 
 const ButtonWrapper = styled.button`
@@ -18,7 +18,7 @@ const Button = ({ children, ...rest }) => (
 )
 
 Button.propTypes = {
-  children: Types.childrenComponent,
+  children: Types.childrenComponent
 }
 
 export default Button

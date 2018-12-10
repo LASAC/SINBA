@@ -1,7 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import LandingPage from './features/LandingPage'
 import LanguageProvider from './features/LanguageProvider'
+import LandingPage from './features/LandingPage'
+import LoginPage from './features/LoginPage'
+import NotFoundPage from './features/NotFoundPage'
+import RegisterPage from './features/RegisterPage'
 import { secureLocale } from './locale'
 
 const { translationMessages, DEFAULT_LOCALE } = require('./i18n')
@@ -34,10 +37,9 @@ class App extends React.Component {
           <Router>
             <Switch>
               <Route exact path='/' component={LandingPage} />
-              {/* <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/home" component={HomePage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <Route component={NotFoundPage} /> */}
+              <Route exact path='/login' component={LoginPage} />
+              <Route exact path='/register' component={RegisterPage} />
+              <Route component={NotFoundPage} />
             </Switch>
           </Router>
         </LanguageProvider>
