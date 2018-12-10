@@ -1,0 +1,20 @@
+{
+  "app.containers.LandingPage.documentation": "Documentação",
+  "app.containers.RegisterPage.header": "Solicitação de Cadastro",
+  "app.messages.name": "Nome",
+  "app.messages.lastName": "Sobrenome",
+  "app.messages.birthDate": "Data de Nascimento",
+  "app.messages.address": "Endereço",
+  "app.messages.telephone": "Telefone",
+  "app.messages.cellphone": "Celular",
+  "app.messages.profession": "Profissão",
+  "app.messages.institution": "Instituição",
+  "app.messages.justification": "Justificativa",
+  "app.messages.login": "Entrar",
+  "app.messages.register": "Registrar",
+  "app.messages.password": "Senha",
+  "app.messages.confirmPassword": "Confirmar Senha",
+  "app.messages.rg": "RG",
+  "app.messages.cpf": "CPF",
+  "app.messages.email": "E-mail"
+}
