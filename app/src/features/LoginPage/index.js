@@ -52,6 +52,8 @@ export class LoginPage extends React.PureComponent {
                 evt.preventDefault()
                 console.log('TODO: Login click')
               }}
+              color='primary'
+              variant='contained'
             >
               Login
             </Button>

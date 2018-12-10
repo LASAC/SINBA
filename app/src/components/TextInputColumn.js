@@ -31,11 +31,11 @@ TextInput.propTypes = {
   name: string,
   id: string,
   label: node,
-  type: string,
+  type: string
 }
 
 TextInput.defaultProps = {
-  type: 'text',
+  type: 'text'
 }
 
 export default TextInput

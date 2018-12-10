@@ -184,6 +184,8 @@ export class RegisterPage extends React.PureComponent {
                 evt.preventDefault()
                 console.log('TODO: validate and submit form')
               }}
+              color='primary'
+              variant='contained'
             >
               <FormattedMessage {...messages.register} />
             </Button>
@@ -202,11 +204,12 @@ export class RegisterPage extends React.PureComponent {
     }
   }
 
-  updateField = payload => {
+  updateField = (name, value) => {
+    console.log('updateField', { name, value })
     this.setState({
       fields: {
         ...this.state.fields,
-        [payload.name]: this.validate(payload)
+        [name]: this.validate({ name, value })
       }
     })
   }
