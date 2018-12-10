@@ -18,20 +18,24 @@ import RegisterBox from './RegisterBox'
 import messages from './messages'
 
 // TODO: get label from messages based on the name passed
-const getLabel = name => <FormattedMessage {...messages[name]} />
+const getLabel = name => {
+  console.log('getLabel - name:', name)
+  console.log('getLabel - messages[name]:', messages[name])
+  return <FormattedMessage {...messages[name]} />
+}
 
 export class RegisterPage extends React.PureComponent {
   state = {
     fields: {
-      name: { value: '', valid: true },
+      firstName: { value: '', valid: true },
       lastName: { value: '', valid: true },
       birthDate: { value: '', valid: true },
       cpf: { value: '', valid: true },
       rg: { value: '', valid: true },
       address: { value: '', valid: true },
-      telephone: { value: '', valid: true },
+      phone: { value: '', valid: true },
       cellphone: { value: '', valid: true },
-      profession: { value: '', valid: true },
+      occupation: { value: '', valid: true },
       institution: { value: '', valid: true },
       justification: { value: '', valid: true },
       email: { value: '', valid: true },
@@ -61,12 +65,12 @@ export class RegisterPage extends React.PureComponent {
           <Form>
             <TextInput
               column
-              key='name'
-              label={getLabel('name')}
-              name='name'
-              value={fields.name.value}
+              key='firstName'
+              label={getLabel('firstName')}
+              name='firstName'
+              value={fields.firstName.value}
               onChange={evt => {
-                this.updateField('name', evt.target.value)
+                this.updateField('firstName', evt.target.value)
               }}
             />
             <TextInput
@@ -106,12 +110,12 @@ export class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
-              key='telephone'
-              label={getLabel('telephone')}
-              name='telephone'
-              value={fields.telephone.value}
+              key='phone'
+              label={getLabel('phone')}
+              name='phone'
+              value={fields.phone.value}
               onChange={evt => {
-                this.updateField('telephone', evt.target.value)
+                this.updateField('phone', evt.target.value)
               }}
             />
             <TextInput
@@ -124,12 +128,12 @@ export class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
-              key='profession'
-              label={getLabel('profession')}
-              name='profession'
-              value={fields.profession.value}
+              key='occupation'
+              label={getLabel('occupation')}
+              name='occupation'
+              value={fields.occupation.value}
               onChange={evt => {
-                this.updateField('profession', evt.target.value)
+                this.updateField('occupation', evt.target.value)
               }}
             />
             <TextInput

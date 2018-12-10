@@ -1,66 +1,66 @@
 export default {
   login: {
     id: 'app.messages.login',
-    defaultMessage: 'Login',
+    defaultMessage: 'Login'
   },
   register: {
     id: 'app.messages.register',
-    defaultMessage: 'Registrar',
+    defaultMessage: 'Registrar'
   },
   password: {
     id: 'app.messages.password',
-    defaultMessage: 'Password',
+    defaultMessage: 'Password'
   },
   confirmPassword: {
     id: 'app.messages.confirmPassword',
-    defaultMessage: 'Confirm Password',
+    defaultMessage: 'Confirm Password'
   },
-  name: {
-    id: 'app.messages.name',
-    defaultMessage: 'Name',
+  firstName: {
+    id: 'app.messages.firstName',
+    defaultMessage: 'First Name'
   },
   lastName: {
     id: 'app.messages.lastName',
-    defaultMessage: 'Last Name',
+    defaultMessage: 'Last Name'
   },
   birthDate: {
     id: 'app.messages.birthDate',
-    defaultMessage: 'Birth Date',
+    defaultMessage: 'Birth Date'
   },
   address: {
     id: 'app.messages.address',
-    defaultMessage: 'Address',
+    defaultMessage: 'Address'
   },
-  telephone: {
-    id: 'app.messages.telephone',
-    defaultMessage: 'Telephone',
+  phone: {
+    id: 'app.messages.phone',
+    defaultMessage: 'Phone'
   },
   cellphone: {
     id: 'app.messages.cellphone',
-    defaultMessage: 'Cellphone',
+    defaultMessage: 'Cellphone'
   },
-  profession: {
-    id: 'app.messages.profession',
-    defaultMessage: 'Profession',
+  occupation: {
+    id: 'app.messages.occupation',
+    defaultMessage: 'Occupation'
   },
   institution: {
     id: 'app.messages.institution',
-    defaultMessage: 'Institution',
+    defaultMessage: 'Institution'
   },
   justification: {
     id: 'app.messages.justification',
-    defaultMessage: 'Justification',
+    defaultMessage: 'Justification'
   },
   cpf: {
     id: 'app.messages.cpf',
-    defaultMessage: 'CPF',
+    defaultMessage: 'CPF'
   },
   rg: {
     id: 'app.messages.rg',
-    defaultMessage: 'RG',
+    defaultMessage: 'RG'
   },
   email: {
     id: 'app.messages.email',
-    defaultMessage: 'E-mail',
-  },
+    defaultMessage: 'E-mail'
+  }
 }
