@@ -18,11 +18,9 @@ import RegisterBox from './RegisterBox'
 import messages from './messages'
 import users from '../../services/backend/users'
 
-const getLabel = name => {
-  return <FormattedMessage {...messages[name]} />
-}
+const getLabel = name => <FormattedMessage {...messages[name]} />
 
-export class RegisterPage extends React.PureComponent {
+class RegisterPage extends React.PureComponent {
   state = {
     fields: {
       firstName: { value: '', valid: true },
@@ -42,163 +40,6 @@ export class RegisterPage extends React.PureComponent {
     }
   }
 
-  render () {
-    const { fields } = this.state
-    return (
-      <Page>
-        <Helmet>
-          <title>Register Page</title>
-          <meta name='description' content='Description of Register Page' />
-        </Helmet>
-        <TopNav>
-          <Link to='/login'>
-            <FormattedMessage {...messages.login} />
-          </Link>
-        </TopNav>
-
-        <RegisterBox>
-          <Title>
-            <FormattedMessage {...messages.header} />
-          </Title>
-          <Form>
-            <TextInput
-              column
-              key='firstName'
-              label={getLabel('firstName')}
-              name='firstName'
-              value={fields.firstName.value}
-              onChange={evt => {
-                this.updateField('firstName', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='lastName'
-              label={getLabel('lastName')}
-              name='lastName'
-              value={fields.lastName.value}
-              onChange={evt => {
-                this.updateField('lastName', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='birthDate'
-              label={getLabel('birthDate')}
-              name='birthDate'
-              value={fields.birthDate.value}
-              onChange={evt => {
-                this.updateField('birthDate', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='cpf'
-              label={getLabel('cpf')}
-              name='cpf'
-              value={fields.cpf.value}
-              onChange={evt => {
-                this.updateField('cpf', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='rg'
-              label={getLabel('rg')}
-              name='rg'
-              value={fields.rg.value}
-              onChange={evt => {
-                this.updateField('rg', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='phone'
-              label={getLabel('phone')}
-              name='phone'
-              value={fields.phone.value}
-              onChange={evt => {
-                this.updateField('phone', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='cellphone'
-              label={getLabel('cellphone')}
-              name='cellphone'
-              value={fields.cellphone.value}
-              onChange={evt => {
-                this.updateField('cellphone', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='occupation'
-              label={getLabel('occupation')}
-              name='occupation'
-              value={fields.occupation.value}
-              onChange={evt => {
-                this.updateField('occupation', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='institution'
-              label={getLabel('institution')}
-              name='institution'
-              value={fields.institution.value}
-              onChange={evt => {
-                this.updateField('institution', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='address'
-              label={getLabel('address')}
-              name='address'
-              value={fields.address.value}
-              onChange={evt => {
-                this.updateField('address', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='justification'
-              label={getLabel('justification')}
-              name='justification'
-              value={fields.justification.value}
-              onChange={evt => {
-                this.updateField('justification', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='email'
-              label={getLabel('email')}
-              name='email'
-              value={fields.email.value}
-              onChange={evt => {
-                this.updateField('email', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='password'
-              label={getLabel('password')}
-              name='password'
-              value={fields.password.value}
-              type='password'
-              onChange={evt => {
-                this.updateField('password', evt.target.value)
-              }}
-            />
-            <TextInput
-              key='confirmPassword'
-              label={getLabel('confirmPassword')}
-              name='confirmPassword'
-              value={fields.confirmPassword.value}
-              type='password'
-              onChange={evt => {
-                this.updateField('confirmPassword', evt.target.value)
-              }}
-            />
-            <Button onClick={this.submit} color='primary' variant='contained'>
-              <FormattedMessage {...messages.register} />
-            </Button>
-          </Form>
-        </RegisterBox>
-      </Page>
-    )
-  }
-
   validate = ({ name, value, shouldValidate }) => {
     console.log('TODO: implement validation:', { name, value, shouldValidate })
     switch (name) {
@@ -210,18 +51,18 @@ export class RegisterPage extends React.PureComponent {
 
   updateField = (name, value) => {
     console.log('updateField', { name, value })
-    this.setState({
+    this.setState(state => ({
       fields: {
-        ...this.state.fields,
+        ...state.fields,
         [name]: this.validate({ name, value })
       }
-    })
+    }))
   }
 
-  submit = async evt => {
+  submit = async (evt) => {
     evt.preventDefault()
     const { fields } = this.state
-    let payload = {}
+    const payload = {}
     for (const field of Object.keys(fields)) {
       payload[field] = fields[field].value
     }
@@ -235,6 +76,163 @@ export class RegisterPage extends React.PureComponent {
       alert('Sorry! Registration unsuccessful...')
       console.log('Registration error:', data)
     }
+  }
+
+  render () {
+    const { fields } = this.state
+    return (
+      <Page>
+        <Helmet>
+          <title>Register Page</title>
+          <meta name="description" content="Description of Register Page" />
+        </Helmet>
+        <TopNav>
+          <Link to="/login">
+            <FormattedMessage {...messages.login} />
+          </Link>
+        </TopNav>
+
+        <RegisterBox>
+          <Title>
+            <FormattedMessage {...messages.header} />
+          </Title>
+          <Form>
+            <TextInput
+              column
+              key="firstName"
+              label={getLabel('firstName')}
+              name="firstName"
+              value={fields.firstName.value}
+              onChange={(evt) => {
+                this.updateField('firstName', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="lastName"
+              label={getLabel('lastName')}
+              name="lastName"
+              value={fields.lastName.value}
+              onChange={(evt) => {
+                this.updateField('lastName', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="birthDate"
+              label={getLabel('birthDate')}
+              name="birthDate"
+              value={fields.birthDate.value}
+              onChange={(evt) => {
+                this.updateField('birthDate', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="cpf"
+              label={getLabel('cpf')}
+              name="cpf"
+              value={fields.cpf.value}
+              onChange={(evt) => {
+                this.updateField('cpf', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="rg"
+              label={getLabel('rg')}
+              name="rg"
+              value={fields.rg.value}
+              onChange={(evt) => {
+                this.updateField('rg', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="phone"
+              label={getLabel('phone')}
+              name="phone"
+              value={fields.phone.value}
+              onChange={(evt) => {
+                this.updateField('phone', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="cellphone"
+              label={getLabel('cellphone')}
+              name="cellphone"
+              value={fields.cellphone.value}
+              onChange={(evt) => {
+                this.updateField('cellphone', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="occupation"
+              label={getLabel('occupation')}
+              name="occupation"
+              value={fields.occupation.value}
+              onChange={(evt) => {
+                this.updateField('occupation', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="institution"
+              label={getLabel('institution')}
+              name="institution"
+              value={fields.institution.value}
+              onChange={(evt) => {
+                this.updateField('institution', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="address"
+              label={getLabel('address')}
+              name="address"
+              value={fields.address.value}
+              onChange={(evt) => {
+                this.updateField('address', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="justification"
+              label={getLabel('justification')}
+              name="justification"
+              value={fields.justification.value}
+              onChange={(evt) => {
+                this.updateField('justification', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="email"
+              label={getLabel('email')}
+              name="email"
+              value={fields.email.value}
+              onChange={(evt) => {
+                this.updateField('email', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="password"
+              label={getLabel('password')}
+              name="password"
+              value={fields.password.value}
+              type="password"
+              onChange={(evt) => {
+                this.updateField('password', evt.target.value)
+              }}
+            />
+            <TextInput
+              key="confirmPassword"
+              label={getLabel('confirmPassword')}
+              name="confirmPassword"
+              value={fields.confirmPassword.value}
+              type="password"
+              onChange={(evt) => {
+                this.updateField('confirmPassword', evt.target.value)
+              }}
+            />
+            <Button onClick={this.submit} color="primary" variant="contained">
+              <FormattedMessage {...messages.register} />
+            </Button>
+          </Form>
+        </RegisterBox>
+      </Page>
+    )
   }
 }
 

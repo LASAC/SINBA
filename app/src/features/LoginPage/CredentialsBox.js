@@ -21,7 +21,7 @@ const CredentialsBox = ({ children }) => (
 )
 
 CredentialsBox.propTypes = {
-  children: Types.childrenComponent
+  children: Types.childrenComponent.isRequired
 }
 
 export default CredentialsBox

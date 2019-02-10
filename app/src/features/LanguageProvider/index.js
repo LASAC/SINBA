@@ -10,23 +10,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { IntlProvider } from 'react-intl'
 
-export class LanguageProvider extends React.PureComponent {
+class LanguageProvider extends React.PureComponent {
   render () {
+    const { locale, children, messages } = this.props
     return (
-      <IntlProvider
-        locale={this.props.locale}
-        key={this.props.locale}
-        messages={this.props.messages[this.props.locale]}
-      >
-        {React.Children.only(this.props.children)}
+      <IntlProvider locale={locale} key={locale} messages={messages[locale]}>
+        {React.Children.only(children)}
       </IntlProvider>
     )
   }
 }
 
 LanguageProvider.propTypes = {
-  locale: PropTypes.string,
-  messages: PropTypes.object,
+  locale: PropTypes.string.isRequired,
+  messages: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.element.isRequired
 }
 

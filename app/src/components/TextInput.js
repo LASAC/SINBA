@@ -21,7 +21,9 @@ const LabelWrapper = styled.div`
   text-overflow: ellipsis;
 `
 
-const TextInput = ({ type, name, id, label, ...rest }) => (
+const TextInput = ({
+  type, name, id, label, ...rest
+}) => (
   <Label htmlFor={id || name}>
     <LabelWrapper>{label}</LabelWrapper>
     <Input type={type} name={name} id={id || name} {...rest} />
@@ -29,14 +31,15 @@ const TextInput = ({ type, name, id, label, ...rest }) => (
 )
 
 TextInput.propTypes = {
-  name: string,
+  name: string.isRequired,
   id: string,
-  label: node,
-  type: string,
+  label: node.isRequired,
+  type: string
 }
 
 TextInput.defaultProps = {
-  type: 'text',
+  id: null,
+  type: 'text'
 }
 
 export default TextInput

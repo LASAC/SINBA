@@ -14,18 +14,32 @@ import TopNav from '../../components/TopNav'
 
 import CredentialsBox from './CredentialsBox'
 import messages from './messages'
+import login, { testAuth } from '../../services/backend/login'
 
-export class LoginPage extends React.PureComponent {
+class LoginPage extends React.PureComponent {
   state = {
     email: '',
     password: ''
   }
+
+  login = async (evt) => {
+    evt.preventDefault()
+    let isAuthenticated = await testAuth()
+    console.log('before login > isAuthenticated:', isAuthenticated)
+
+    const result = await login(this.state)
+    console.log('LoginPage.login > result:', result)
+
+    isAuthenticated = await testAuth()
+    console.log('before login > isAuthenticated:', isAuthenticated)
+  }
+
   render () {
     const { email, password } = this.state
     return (
       <Page>
         <TopNav>
-          <Link to='/register'>
+          <Link to="/register">
             <FormattedMessage {...messages.register} />
           </Link>
         </TopNav>
@@ -33,27 +47,24 @@ export class LoginPage extends React.PureComponent {
         <CredentialsBox>
           <Form>
             <TextInput
-              label='Email'
-              name='email'
+              label="Email"
+              name="email"
               value={email}
               onChange={evt => this.setState({ email: evt.target.value })}
             />
             <TextInput
-              type='password'
+              type="password"
               label={<FormattedMessage {...messages.password} />}
-              name='password'
+              name="password"
               value={password}
               onChange={evt => this.setState({ password: evt.target.value })}
             />
             <Button
-              height='30px'
-              width='97%'
-              onClick={evt => {
-                evt.preventDefault()
-                console.log('TODO: Login click')
-              }}
-              color='primary'
-              variant='contained'
+              height="30px"
+              width="97%"
+              onClick={this.login}
+              color="primary"
+              variant="contained"
             >
               Login
             </Button>

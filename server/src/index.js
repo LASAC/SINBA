@@ -1,6 +1,11 @@
 import server from './server'
+import dbConnect from './db'
 
-const port = process.env.PORT || 8081
-server.listen(port, () => console.log(`Listening on port ${port}`))
+const startServer = async () => {
+  await dbConnect()
 
-export default server
+  const port = process.env.PORT || 8081
+  server.listen(port, () => console.log(`Listening on port ${port}`))
+}
+
+startServer()

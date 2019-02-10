@@ -5,7 +5,7 @@ export const Model = mongoose.model('users', schema)
 
 export const getAll = (q = null, sorted = false) => {
   let query =
-    q && (q + '').length > 0
+    q && (`${q}`).length > 0
       ? Model.find({
         name: {
           $regex: `.*${q}.*`,
@@ -14,17 +14,15 @@ export const getAll = (q = null, sorted = false) => {
       })
       : Model.find()
 
-  if (sorted && (sorted + '').toLowerCase() === 'true') {
+  if (sorted && (`${sorted}`).toLowerCase() === 'true') {
     query = query.sort('name')
   }
   return query
 }
 
-export const getById = id => {
-  return Model.findById(id)
-}
+export const getById = id => Model.findById(id)
 
-export const add = async data => {
+export const add = async (data) => {
   console.log('users/model/add > data received:', data)
   validate(data)
   const element = new Model(data)
@@ -32,7 +30,7 @@ export const add = async data => {
   return element
 }
 
-export const addAll = array => {
+export const addAll = (array) => {
   if (!Array.isArray(array)) {
     throw new Error('Array of Models Expected!')
   }
@@ -44,6 +42,4 @@ export const update = (id, data) => {
   return Model.findByIdAndUpdate(id, { $set: data }, { new: true })
 }
 
-export const deleteById = id => {
-  return Model.findByIdAndDelete(id)
-}
+export const deleteById = id => Model.findByIdAndDelete(id)

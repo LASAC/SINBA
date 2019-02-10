@@ -19,7 +19,7 @@ const TitleWrapper = styled.div`
 const Title = ({ children }) => <TitleWrapper>{children}</TitleWrapper>
 
 Title.propTypes = {
-  children: Types.childrenComponent
+  children: Types.childrenComponent.isRequired
 }
 
 export default Title

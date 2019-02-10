@@ -17,10 +17,10 @@ const defaultValue = {
 export const Context = React.createContext(defaultValue)
 
 class App extends React.Component {
-  setLocale = locale =>
-    this.setState(state => ({
-      locale: secureLocale(locale)
-    }))
+  /* eslint-disable react/sort-comp, react/no-unused-state */
+  setLocale = locale => this.setState(state => ({
+    locale: secureLocale(locale)
+  }))
 
   state = {
     locale: DEFAULT_LOCALE,
@@ -30,15 +30,12 @@ class App extends React.Component {
   render () {
     return (
       <Context.Provider value={this.state}>
-        <LanguageProvider
-          locale={this.state.locale}
-          messages={translationMessages}
-        >
+        <LanguageProvider locale={this.state.locale} messages={translationMessages}>
           <Router>
             <Switch>
-              <Route exact path='/' component={LandingPage} />
-              <Route exact path='/login' component={LoginPage} />
-              <Route exact path='/register' component={RegisterPage} />
+              <Route exact path="/" component={LandingPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Router>

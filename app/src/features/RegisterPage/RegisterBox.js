@@ -26,7 +26,7 @@ const RegisterBox = ({ children }) => (
 )
 
 RegisterBox.propTypes = {
-  children: Types.childrenComponent
+  children: Types.childrenComponent.isRequired
 }
 
 export default RegisterBox

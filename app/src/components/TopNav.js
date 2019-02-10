@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Types from '../types'
 import styled from 'styled-components'
+import Types from '../types'
 import { topNavBackgroundColor, mainFontFamily, mainColor } from './GlobalStyle'
 
 const backgroundColor = topNavBackgroundColor
@@ -44,7 +44,7 @@ export const Right = styled.nav`
 
 const TopNav = ({ children }) => (
   <Wrapper>
-    <Link to='/'>
+    <Link to="/">
       <Logo>SINBA</Logo>
     </Link>
     <Right>{children}</Right>
@@ -52,7 +52,7 @@ const TopNav = ({ children }) => (
 )
 
 TopNav.propTypes = {
-  children: Types.childrenComponent
+  children: Types.childrenComponent.isRequired
 }
 
 export default TopNav

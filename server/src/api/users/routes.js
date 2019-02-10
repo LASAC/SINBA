@@ -14,25 +14,17 @@ const handle = async (req, res, handler) => {
 export default () => {
   const api = express.Router()
 
-  api.get('/', (req, res) =>
-    handle(req, res, () => model.getAll(req.query.q, req.query.sorted))
-  )
+  api.get('/', (req, res) => handle(req, res, () => model.getAll(req.query.q, req.query.sorted)))
 
   api.post('/', (req, res) => handle(req, res, () => model.add(req.body)))
 
   // api.post('/all', (req, res) => handle(req, res, () => model.addAll(req.body)))
 
-  api.get('/:id', (req, res) =>
-    handle(req, res, () => model.getById(req.params.id))
-  )
+  api.get('/:id', (req, res) => handle(req, res, () => model.getById(req.params.id)))
 
-  api.put('/:id', (req, res) =>
-    handle(req, res, () => model.update(req.params.id, req.body))
-  )
+  api.put('/:id', (req, res) => handle(req, res, () => model.update(req.params.id, req.body)))
 
-  api.delete('/:id', (req, res) =>
-    handle(req, res, () => model.deleteById(req.params.id))
-  )
+  api.delete('/:id', (req, res) => handle(req, res, () => model.deleteById(req.params.id)))
 
   return api
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import { bool, node, string } from 'prop-types'
+import { node, string } from 'prop-types'
 import styled from 'styled-components'
 import BaseInput from './Input'
 
 const Label = styled.label`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.column ? 'column' : 'row')};
   justify-content: space-between;
 `
 
@@ -19,7 +19,9 @@ const LabelWrapper = styled.div`
   text-overflow: ellipsis;
 `
 
-const TextInput = ({ type, name, id, label, ...rest }) => (
+const TextInput = ({
+  column, id, label, name, type, ...rest
+}) => (
   <Label htmlFor={id || name}>
     <LabelWrapper>{label}</LabelWrapper>
     <Input type={type} name={name} id={id || name} {...rest} />
@@ -27,10 +29,9 @@ const TextInput = ({ type, name, id, label, ...rest }) => (
 )
 
 TextInput.propTypes = {
-  column: bool,
-  name: string,
-  id: string,
-  label: node,
+  name: string.isRequired,
+  id: string.isRequired,
+  label: node.isRequired,
   type: string
 }
 

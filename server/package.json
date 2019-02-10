@@ -5,30 +5,45 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -w src --exec \"babel-node src\"",
-    "test": "standard && NODE_ENV=test jest"
+    "test": "yarn lint && NODE_ENV=test jest",
+    "lint": "eslint src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "fawn": "^2.1.5",
     "helmet": "^3.14.0",
     "joi": "^14.0.1",
     "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.7",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^23.6.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.7",
-    "standard": "^12.0.1",
+    "prettier": "^1.15.3",
     "supertest": "^3.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import BasePage from '../../components//Page'
+import BasePage from '../../components/Page'
 import { lightGray } from '../../components/GlobalStyle'
 
 const Page = styled(BasePage)`
