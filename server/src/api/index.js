@@ -26,7 +26,11 @@ passport.use(jwtStrategy)
 export default () => {
   const api = express.Router()
 
-  api.get('/ping', (req, res) => res.json('pong'))
+  api.get('/ping', (req, res) => {
+    const { logger } = req
+    logger.debug('ping > Hello From Logger!')
+    res.json('pong')
+  })
   api.get('/version', (req, res) => res.json({ version }))
   api.use('/users', users())
 
