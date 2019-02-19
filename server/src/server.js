@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import cors from 'cors'
 import createLogger from './logger/createLogger'
+import config from './config'
 import api from './api'
 import logger from './logger'
 
@@ -28,8 +29,7 @@ if (!secret) {
   throw new Error('Missing API SECRET!')
 }
 // TODO: add support to refresh tokens
-const expiresIn = 1200 // 2 hours
-app.use('/api', api({ logger: defaultLogger, secret, expiresIn }))
+app.use('/api', api({ logger: defaultLogger, secret, ...config }))
 
 defaultLogger.debug(`Environment: ${process.env.NODE_ENV || 'development'}`)
 

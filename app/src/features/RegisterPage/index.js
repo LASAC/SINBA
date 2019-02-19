@@ -8,6 +8,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import users from '../../services/backend/users'
+import logger from '../../services/logger'
 import Form from '../../components/Form'
 import Page from '../../components/Page'
 import Button from '../../components/Button'
@@ -16,10 +18,7 @@ import TextInput from '../../components/TextInputColumn'
 import Title from './Title'
 import RegisterBox from './RegisterBox'
 import messages from './messages'
-import users from '../../services/backend/users'
-import logger from '../../services/logger'
-
-const getLabel = name => <FormattedMessage {...messages[name]} />
+import { getErrorMessage } from './helpers'
 
 class RegisterPage extends React.PureComponent {
   state = {
@@ -41,13 +40,38 @@ class RegisterPage extends React.PureComponent {
     }
   }
 
+  getLabel = (name) => {
+    const { fields } = this.state
+    if (!fields[name].valid) {
+      return (
+        <>
+          <FormattedMessage {...messages[name]} />
+          <span style={{ color: 'red' }}> invalid</span>
+        </>
+      )
+    }
+    return <FormattedMessage {...messages[name]} />
+  }
+
   validate = ({ name, value, shouldValidate }) => {
+    const { fields } = this.state
     logger.debug('TODO: implement validation:', { name, value, shouldValidate })
     switch (name) {
+      case 'confirmPassword': {
+        return { value, valid: value === fields.password.value }
+      }
       default: {
         return { value, valid: !shouldValidate }
       }
     }
+  }
+
+  isFormValid = () => {
+    const { fields } = this.state
+    for (const field of Object.keys(fields)) {
+      if (!fields[field].valid) return false
+    }
+    return true
   }
 
   updateField = (name, value) => {
@@ -64,17 +88,26 @@ class RegisterPage extends React.PureComponent {
     evt.preventDefault()
     const { fields } = this.state
     const payload = {}
+
+    if (!this.isFormValid()) {
+      alert('Please fix the errors before submitting...')
+    }
+
     for (const field of Object.keys(fields)) {
       payload[field] = fields[field].value
     }
 
+    delete payload.confirmPassword
+
     logger.debug('RegisterPage.submit > payload:', payload)
     const { ok, data } = await users.post(payload)
     if (ok) {
-      alert('Registration complete!')
+      alert(
+        'Congratulations! You completed your registration and now it is now pending approval. You will receive an email when Administrator approves your access.'
+      )
       logger.debug('Registration complete! data:', data)
     } else {
-      alert('Sorry! Registration unsuccessful...')
+      alert(`Sorry! Registration unsuccessful:\n${getErrorMessage(data)}`)
       logger.debug('Registration error:', data)
     }
   }
@@ -100,8 +133,9 @@ class RegisterPage extends React.PureComponent {
           <Form>
             <TextInput
               column
+              id="firstName"
               key="firstName"
-              label={getLabel('firstName')}
+              label={this.getLabel('firstName')}
               name="firstName"
               value={fields.firstName.value}
               onChange={(evt) => {
@@ -109,8 +143,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="lastName"
               key="lastName"
-              label={getLabel('lastName')}
+              label={this.getLabel('lastName')}
               name="lastName"
               value={fields.lastName.value}
               onChange={(evt) => {
@@ -118,8 +153,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="birthDate"
               key="birthDate"
-              label={getLabel('birthDate')}
+              label={this.getLabel('birthDate')}
               name="birthDate"
               value={fields.birthDate.value}
               onChange={(evt) => {
@@ -127,8 +163,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="cpf"
               key="cpf"
-              label={getLabel('cpf')}
+              label={this.getLabel('cpf')}
               name="cpf"
               value={fields.cpf.value}
               onChange={(evt) => {
@@ -136,8 +173,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="rg"
               key="rg"
-              label={getLabel('rg')}
+              label={this.getLabel('rg')}
               name="rg"
               value={fields.rg.value}
               onChange={(evt) => {
@@ -145,8 +183,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="phone"
               key="phone"
-              label={getLabel('phone')}
+              label={this.getLabel('phone')}
               name="phone"
               value={fields.phone.value}
               onChange={(evt) => {
@@ -154,8 +193,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="cellphone"
               key="cellphone"
-              label={getLabel('cellphone')}
+              label={this.getLabel('cellphone')}
               name="cellphone"
               value={fields.cellphone.value}
               onChange={(evt) => {
@@ -163,8 +203,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="occupation"
               key="occupation"
-              label={getLabel('occupation')}
+              label={this.getLabel('occupation')}
               name="occupation"
               value={fields.occupation.value}
               onChange={(evt) => {
@@ -172,8 +213,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="institution"
               key="institution"
-              label={getLabel('institution')}
+              label={this.getLabel('institution')}
               name="institution"
               value={fields.institution.value}
               onChange={(evt) => {
@@ -181,8 +223,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="address"
               key="address"
-              label={getLabel('address')}
+              label={this.getLabel('address')}
               name="address"
               value={fields.address.value}
               onChange={(evt) => {
@@ -190,8 +233,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="justification"
               key="justification"
-              label={getLabel('justification')}
+              label={this.getLabel('justification')}
               name="justification"
               value={fields.justification.value}
               onChange={(evt) => {
@@ -199,8 +243,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="email"
               key="email"
-              label={getLabel('email')}
+              label={this.getLabel('email')}
               name="email"
               value={fields.email.value}
               onChange={(evt) => {
@@ -208,8 +253,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="password"
               key="password"
-              label={getLabel('password')}
+              label={this.getLabel('password')}
               name="password"
               value={fields.password.value}
               type="password"
@@ -218,8 +264,9 @@ class RegisterPage extends React.PureComponent {
               }}
             />
             <TextInput
+              id="confirmPassword"
               key="confirmPassword"
-              label={getLabel('confirmPassword')}
+              label={this.getLabel('confirmPassword')}
               name="confirmPassword"
               value={fields.confirmPassword.value}
               type="password"

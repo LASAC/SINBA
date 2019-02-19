@@ -119,6 +119,13 @@ export const validate = (data, updating = false) => {
   }
 }
 
+//
+// Notice about MongoDB unique keys:
+// Adding the "unique" property on mongoose
+// won't update the Document if it was already
+// created.
+//
+
 export const schema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -172,6 +179,8 @@ export const schema = new mongoose.Schema({
     type: String,
     minlength: 3,
     maxlength: 255,
+    unique: true, // see: Notice about MongoDB unique keys
+    dropDups: true,
     required: true
   },
   password: {

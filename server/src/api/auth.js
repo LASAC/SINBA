@@ -2,6 +2,9 @@ import jwt from 'jsonwebtoken'
 import passport from 'passport'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import userModel from './users/model'
+import { sendErrorResponse } from './handleRequest'
+import { UNAUTHORIZED, FORBIDDEN } from './errors'
+import { UserRole } from './users/schema'
 
 export default ({ logger: defaultLogger, secret, expiresIn }) => {
   const opts = {
@@ -50,6 +53,11 @@ export default ({ logger: defaultLogger, secret, expiresIn }) => {
       req.logger.debug('/login > user:', user)
 
       if (user) {
+        // check if user is INACTIVE, if so, FORBIDDEN
+        if (user.role === UserRole.INACTIVE) {
+          const err = { message: 'Registration is pending approval!' }
+          return sendErrorResponse(req, res, err, FORBIDDEN)
+        }
         // if authentication is successful, attach user obj to the request
         req.user = user
 
@@ -62,12 +70,11 @@ export default ({ logger: defaultLogger, secret, expiresIn }) => {
         })
       }
       req.logger.debug('/login > no exception thrown, but user not found...')
+      return sendErrorResponse(req, res, { message: 'User Not Found' }, UNAUTHORIZED)
     } catch (err) {
       req.logger.debug('/login > error caught:', err.message)
+      return sendErrorResponse(req, res, err, UNAUTHORIZED)
     }
-
-    req.logger.debug('/login > default return statement...')
-    return res.status(401).json({ message: 'Authentication failed' })
   }
 
   return {

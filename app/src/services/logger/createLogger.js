@@ -6,11 +6,8 @@
  * @author Geraldo B. Landre
  */
 class Logger {
-  constructor(options) {
-    const {
-      level = 'debug',
-      prefix = ''
-    } = options || {}
+  constructor (options) {
+    const { level = 'debug', prefix = '' } = options || {}
     this.level = Object.keys(LogLevel).includes(level) ? level : 'error'
     this.prefix = prefix
   }
@@ -38,11 +35,11 @@ class Logger {
     // except by 'debug' since it's filtered by default by Google Chrome
     if (level !== 'debug' && Object.keys(ConsoleLevel).includes(level)) {
       // uses default console method
-      return consoleLog(level, `[${level}] ${this.prefix}${message + ''}`, meta)
+      return consoleLog(level, `[${level}] ${this.prefix}${`${message}`}`, meta)
     }
 
     // otherwise, use traditional console.log
-    return consoleLog('log', `[${level}] ${this.prefix}${message + ''}`, meta)
+    return consoleLog('log', `[${level}] ${this.prefix}${`${message}`}`, meta)
   }
 }
 
