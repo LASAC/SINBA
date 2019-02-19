@@ -1,7 +1,6 @@
 module.exports = {
   extends: ['airbnb-base', 'standard'],
   rules: {
-    'no-console': 'off' // temporary, until we define a logger
     // 'import/prefer-default-export': 'off',
     // 'arrow-parens': ['error', 'as-needed'],
     // 'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],

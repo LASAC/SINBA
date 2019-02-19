@@ -7,7 +7,10 @@
  */
 class Logger {
   constructor(options) {
-    const { level = 'debug', prefix = '' } = options || {}
+    const {
+      level = 'debug',
+      prefix = ''
+    } = options || {}
     this.level = Object.keys(LogLevel).includes(level) ? level : 'error'
     this.prefix = prefix
   }

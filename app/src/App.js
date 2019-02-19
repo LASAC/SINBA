@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import HomePage from './features/HomePage'
 import LanguageProvider from './features/LanguageProvider'
 import LandingPage from './features/LandingPage'
 import LoginPage from './features/LoginPage'
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/" component={LandingPage} />
+              <Route exact path="/home" component={HomePage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route component={NotFoundPage} />

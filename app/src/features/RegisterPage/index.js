@@ -17,6 +17,7 @@ import Title from './Title'
 import RegisterBox from './RegisterBox'
 import messages from './messages'
 import users from '../../services/backend/users'
+import logger from '../../services/logger'
 
 const getLabel = name => <FormattedMessage {...messages[name]} />
 
@@ -41,7 +42,7 @@ class RegisterPage extends React.PureComponent {
   }
 
   validate = ({ name, value, shouldValidate }) => {
-    console.log('TODO: implement validation:', { name, value, shouldValidate })
+    logger.debug('TODO: implement validation:', { name, value, shouldValidate })
     switch (name) {
       default: {
         return { value, valid: !shouldValidate }
@@ -50,7 +51,7 @@ class RegisterPage extends React.PureComponent {
   }
 
   updateField = (name, value) => {
-    console.log('updateField', { name, value })
+    logger.debug('updateField', { name, value })
     this.setState(state => ({
       fields: {
         ...state.fields,
@@ -67,14 +68,14 @@ class RegisterPage extends React.PureComponent {
       payload[field] = fields[field].value
     }
 
-    console.log('RegisterPage.submit > payload:', payload)
+    logger.debug('RegisterPage.submit > payload:', payload)
     const { ok, data } = await users.post(payload)
     if (ok) {
       alert('Registration complete!')
-      console.log('Registration complete! data:', data)
+      logger.debug('Registration complete! data:', data)
     } else {
       alert('Sorry! Registration unsuccessful...')
-      console.log('Registration error:', data)
+      logger.debug('Registration error:', data)
     }
   }
 

@@ -6,36 +6,50 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import styled from 'styled-components'
+import { CircularProgress } from '@material-ui/core'
+import { login } from '../../services/auth'
+import logger from '../../services/logger'
 import Form from '../../components/Form'
 import Page from '../../components/Page'
 import Button from '../../components/Button'
 import TextInput from '../../components/TextInput'
 import TopNav from '../../components/TopNav'
-
 import CredentialsBox from './CredentialsBox'
 import messages from './messages'
-import login, { testAuth } from '../../services/backend/login'
+
+const ErrorMessage = styled.div`
+  color: red;
+`
 
 class LoginPage extends React.PureComponent {
   state = {
     email: '',
-    password: ''
+    password: '',
+    errorMessage: '',
+    loading: false
   }
 
   login = async (evt) => {
     evt.preventDefault()
-    let isAuthenticated = await testAuth()
-    console.log('before login > isAuthenticated:', isAuthenticated)
+    this.setState({ errorMessage: '', loading: true })
 
-    const result = await login(this.state)
-    console.log('LoginPage.login > result:', result)
+    const { email, password } = this.state
+    const result = await login({ email, password })
+    logger.debug('LoginPage.login > result:', result)
 
-    isAuthenticated = await testAuth()
-    console.log('before login > isAuthenticated:', isAuthenticated)
+    const { data, ok } = result
+    if (ok) {
+      window.location.replace('/home')
+    } else {
+      this.setState({ errorMessage: data.message, loading: false }, () => logger.debug('errorMessage: ', this.state.errorMessage))
+    }
   }
 
   render () {
-    const { email, password } = this.state
+    const {
+      email, password, errorMessage, loading
+    } = this.state
     return (
       <Page>
         <TopNav>
@@ -59,14 +73,17 @@ class LoginPage extends React.PureComponent {
               value={password}
               onChange={evt => this.setState({ password: evt.target.value })}
             />
+
+            {errorMessage ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
             <Button
               height="30px"
               width="97%"
               onClick={this.login}
               color="primary"
               variant="contained"
+              disabled={loading}
             >
-              Login
+              {loading ? <CircularProgress size={20} /> : 'Login'}
             </Button>
           </Form>
         </CredentialsBox>

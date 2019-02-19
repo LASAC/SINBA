@@ -1,4 +1,5 @@
 import api from './api'
+import logger from '../logger'
 
 const post = data => api.post('/login', data)
 
@@ -7,21 +8,14 @@ const setToken = (token) => {
 }
 
 const login = async ({ email, password }) => {
-  const { ok, data } = await post({ email, password })
+  const result = await post({ email, password })
+  const { ok, data } = result
   if (ok) {
-    // TODO: set header with token
     const { message, token } = data
-    console.log(message, token)
+    logger.debug(message, token)
     setToken(token)
   }
-  console.log('ERROR:', { data })
-  return data
-}
-
-export const testAuth = async () => {
-  const { ok, data } = await api.get('/protected')
-  console.log('login.testAuth > data:', data)
-  return ok
+  return result
 }
 
 export default login

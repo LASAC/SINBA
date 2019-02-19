@@ -15,6 +15,7 @@ import messages from './messages'
 import Page from './Page'
 import TopNav from './TopNav'
 import versionService from '../../services/backend/version'
+import logger from '../../services/logger'
 
 class LandingPage extends React.Component {
   state = { version: '???' }
@@ -23,7 +24,7 @@ class LandingPage extends React.Component {
     const { ok, data } = await versionService.get()
     if (ok) {
       const { version } = data
-      console.log('version received from the server:', version)
+      logger.debug('version received from the server:', version)
       this.setState({ version })
     }
   }
@@ -33,8 +34,8 @@ class LandingPage extends React.Component {
     return (
       <Context.Consumer>
         {(context) => {
-          console.log('locale:', context.locale)
-          console.log('setLocale:', context.setLocale)
+          logger.debug('locale:', context.locale)
+          logger.debug('setLocale:', context.setLocale)
           return (
             <Page>
               <Background />
